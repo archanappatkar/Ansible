@@ -1,0 +1,15 @@
+---
+name : running show commands on cisco IOS
+hosts : routers
+gather facts : no
+connection : network_cli
+
+tasks:
+- name : show version
+  ios_command:
+    commands: show version
+  register: show_version
+- name : save output to file
+  copy:
+    content: "{{ show_version.stdout[0] }}"
+    dest: "show_version_{{ inventory_hostname }}.txt"

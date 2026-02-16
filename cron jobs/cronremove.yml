@@ -1,0 +1,15 @@
+---
+-name: Modify Cron
+ hosts:all
+
+tasks: 
+  -name: Remove Cron Job
+  cron:
+    name: run test script
+    state: absent
+    user: root
+    disabled : no 
+    env: no                 #environemnt variable
+    job : /home/test.sh
+    insertbefore: PATH      #insert before the varable PATH insertafter can also be used
+    

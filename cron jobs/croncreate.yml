@@ -1,0 +1,14 @@
+---
+- name: creating Cron Job
+  hosts: all
+  tasks:
+    - name: creating Cron Job
+      cron:
+        name: run test script
+        minute: "30"
+        hour: "18"
+        day: "15"
+        month: "*"
+        weekday: "*"
+        user: root
+        job: /home/test.sh

@@ -1,0 +1,17 @@
+name: configuring cisco IOS devices 
+gather_facts: no
+hosts: routers
+connection: network_cli
+
+tasks:
+- name: basic configuration
+  ios_config:
+    save_when: modified
+    lines:
+      - hostname {{ inventory_hostname }}
+      - interface GigabitEthernet0/0
+      - description configured by ansible
+      - no shutdown
+    register: config_output
+- name: save output to file
+  

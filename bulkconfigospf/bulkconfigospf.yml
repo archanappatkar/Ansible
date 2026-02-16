@@ -1,0 +1,21 @@
+---
+-name : configuring cisco IOS devices
+gather facts: no
+hosts: routers
+connection : network_cli
+tasks:
+- name: ospf configuration on cisco IOS routers
+  ios_config:
+    save_when: modified
+    lines:
+      - router ospf 1
+      - network 0.0.0.0 0.0.0.0 area 0
+      - distaace 50
+      - default-information originate
+      - parents : router ospf 1
+    register: 
+    
+- name: save output to file
+  copy:
+    content: "{{ config_output }}"
+    dest: "ospf_config_output_{{ inventory_hostname }}.txt"

@@ -1,0 +1,11 @@
+---
+name : backup configuration changes
+hosts : routers
+gather_facts : no
+connection : network_cli
+tasks:
+- name : backup configuration changes on cisco IOS routers
+  ios_config:
+    save_when: modified
+    backup: yes
+  register: backup_output
