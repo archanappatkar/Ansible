@@ -1,0 +1,13 @@
+---
+name: downloading files to multiple servers from one url
+hosts: all
+gather_facts: no  
+tasks:
+  - name: downloading files to multiple servers from one url
+    get_url:
+      url: https://www.ansible.com/resources/get-started
+      dest: /home/tmp/script
+      mode: '0777'
+      owner: root
+      group: root
+ 

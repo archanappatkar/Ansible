@@ -1,0 +1,17 @@
+---
+name: creating user on remote hosts
+hosts: all
+
+tasks:
+  - name: creating user on remote hosts
+    user:
+      name: nick
+      comment: adding new user for QA team
+      password: "{{ 'password' | password_hash('sha512') }}"
+      update_password: always
+      state: present
+      shell: /bin/bash
+
+      #state: absent      removes the user but keeps the home directory and files
+      #remove: yes    removes all files of the user
+      #groups: admin, QA, nick    adds the user to the admin, QA, nick group

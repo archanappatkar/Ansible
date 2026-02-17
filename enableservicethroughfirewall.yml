@@ -1,0 +1,16 @@
+---
+name: enabling port on firewall so we can access the service
+hosts: all
+become: true   #to run the tasks with elevated privileges, we need to use become: true
+
+tasks:
+  - name: enabling port on firewall so we can access the service
+    firewalld:
+      port: 80/tcp
+      permanent: yes
+      state: enabled
+
+    -name: reload firewalld    #to apply the changes, firewalld needs to be reloaded
+    service:
+      name: firewalld
+      state: reloaded

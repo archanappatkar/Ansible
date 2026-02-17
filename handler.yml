@@ -1,0 +1,18 @@
+---
+name: enabling port on firewall so we can access the service
+hosts: all
+become: true   #to run the tasks with elevated privileges, we need to use become: true
+
+tasks:
+  - name: enabling port on firewall so we can access the service
+    firewalld:
+      port: 80/tcp
+      permanent: yes
+      state: enabled
+      notify: reload firewalld    #this will notify the handler to reload firewalld after enabling the port
+
+handler:                        #handlers will be implemented only after all tasks listed in the playbook are executed
+    -name: reload firewalld    #reload will be only performed when the task that enables the port makes changes to the firewall configuration
+    service:
+      name: firewalld
+      state: reloaded

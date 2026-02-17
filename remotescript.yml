@@ -1,0 +1,8 @@
+---
+name : run a script on remote hosts
+hosts : all
+gather_facts : no
+
+tasks: 
+  -name : run a script on remote hosts
+  shell : /home/test.sh
